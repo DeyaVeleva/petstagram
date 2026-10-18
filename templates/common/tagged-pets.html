@@ -1,0 +1,6 @@
+{% for pet in photo.tagged_pets.all %}
+            <a href="{% url 'pets:details' 'username' pet.slug %}">
+                <p class="message">
+                    <b>{{ pet.name }}</b></p>
+            </a>
+        {% endfor %}

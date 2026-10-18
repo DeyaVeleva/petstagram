@@ -1,0 +1,38 @@
+
+{% load static %}
+
+<div class="card" id="{{ photo.pk }}">
+    <div class="top">
+        <div class="userDetails">
+            <div class="profilepic">
+                <div class="profile_img">
+                    <div class="image">
+                        <img src="{% static 'images/person.png' %}"
+                             alt="Profile picture">
+                    </div>
+                </div>
+            </div>
+
+            <h3>
+                Petstagram
+                {% if photo.location %}
+                    <span>{{ photo.location }}</span>
+                {% endif %}
+            </h3>
+        </div>
+    </div>
+
+    {% include 'common/photo-post-content.html' with photo=photo %}
+
+    <div class="addComments">
+        <form method="post" action="{% url 'common:comment' photo.id %}">
+            {% csrf_token %}
+            {{ comment_form }}
+            <button type="submit">Post</button>
+        </form>
+    </div>
+
+    <a href="{% url 'photos:detail' photo.pk %}">
+        <h4 class="details">See details</h4>
+    </a>
+</div>
